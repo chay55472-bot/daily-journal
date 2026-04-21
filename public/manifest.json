@@ -1,0 +1,10 @@
+{
+  "name": "Daily Journal",
+  "short_name": "Journal",
+  "description": "캘린더, 할 일, 일기, 무드 트래커",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F5EFE0",
+  "theme_color": "#F5EFE0",
+  "lang": "ko"
+}
