@@ -160,14 +160,15 @@ export default function App() {
         @keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
         .song-card input{background:transparent;border:none;color:#fff;font-size:.78rem;font-family:inherit;width:100%;min-width:0;font-weight:600;}
         .song-card input::placeholder{color:rgba(255,255,255,.35);}
-        /* 모바일 */
-        @media(max-width:600px){
-          .today-grid{flex-direction:column!important;}
-          .today-left{flex-direction:row!important;align-items:flex-start!important;gap:.8rem!important;}
-          .today-left-col{width:auto!important;min-width:0!important;}
-          .today-photo{width:100px!important;height:100px!important;}
-          .today-right{width:100%!important;}
+        /* 모바일 — 완전 세로 스택 */
+        @media(max-width:640px){
+          .today-grid{flex-direction:column!important;gap:.8rem!important;}
+          .today-left{flex-direction:column!important;width:100%!important;flex:none!important;gap:.6rem!important;}
+          .today-left-col{width:100%!important;min-width:0!important;}
+          .today-photo{width:100%!important;height:160px!important;}
+          .today-right{width:100%!important;flex:none!important;}
           .week-grid{grid-template-columns:repeat(7,1fr)!important;}
+          .song-pill{max-width:55vw!important;}
         }
       `}</style>
       <div className="grain"/>
@@ -561,13 +562,14 @@ function CurrentWeek({week,entries,today,categories,openDate,patchEntry}){
               <div key={i} style={{display:'flex',alignItems:'center',gap:0}}>
                 {url?(
                   <a href={url} target="_blank" rel="noreferrer"
-                    style={{fontSize:'.72rem',color:'#2C1F15',background:'rgba(255,255,255,.5)',border:'1px solid rgba(44,31,21,.15)',borderRight:'none',borderRadius:'20px 0 0 20px',padding:'3px 9px',textDecoration:'none',whiteSpace:'nowrap',transition:'background .15s'}}
+                    className="song-pill"
+                    style={{fontSize:'.72rem',color:'#2C1F15',background:'rgba(255,255,255,.5)',border:'1px solid rgba(44,31,21,.15)',borderRight:'none',borderRadius:'20px 0 0 20px',padding:'3px 9px',textDecoration:'none',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',maxWidth:'220px',transition:'background .15s',display:'inline-block'}}
                     onMouseEnter={e=>e.currentTarget.style.background='rgba(255,255,255,.85)'}
                     onMouseLeave={e=>e.currentTarget.style.background='rgba(255,255,255,.5)'}>
                     {s.song}
                   </a>
                 ):(
-                  <span style={{fontSize:'.72rem',color:'#8B6F56',fontStyle:'italic',background:'rgba(255,255,255,.5)',border:'1px solid rgba(44,31,21,.15)',borderRight:'none',borderRadius:'20px 0 0 20px',padding:'3px 9px',whiteSpace:'nowrap'}}>{s.song}</span>
+                  <span className="song-pill" style={{fontSize:'.72rem',color:'#8B6F56',fontStyle:'italic',background:'rgba(255,255,255,.5)',border:'1px solid rgba(44,31,21,.15)',borderRight:'none',borderRadius:'20px 0 0 20px',padding:'3px 9px',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',maxWidth:'220px',display:'inline-block'}}>{s.song}</span>
                 )}
                 <button onClick={()=>removeSong(s.d)}
                   style={{background:'rgba(44,31,21,.15)',border:'1px solid rgba(44,31,21,.15)',borderLeft:'none',borderRadius:'0 20px 20px 0',padding:'3px 9px',cursor:'pointer',color:'#8B6F56',fontSize:'.72rem',lineHeight:1,transition:'background .15s',whiteSpace:'nowrap'}}
